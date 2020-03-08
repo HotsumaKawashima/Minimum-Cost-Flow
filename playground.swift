@@ -3,10 +3,10 @@ import Foundation
 struct Edge {
     var from: Int
     var to: Int
-    var cost: Int
+    var cost: UInt64
     var org: Bool
 
-    init(_ from: Int, _ to: Int, _ cost: Int, _ org: Bool) {
+    init(_ from: Int, _ to: Int, _ cost: UInt64, _ org: Bool) {
         self.from = from
         self.to = to
         self.cost = cost
@@ -40,12 +40,12 @@ struct UnionFind {
     }
 }
 
-func read() -> (N: Int, M: Int, D: Int, edges: [Edge]) {
+func read() -> (N: Int, M: Int, D: UInt64, edges: [Edge]) {
     var line = readLine(strippingNewline: true)!
     var sp = line.components(separatedBy: " ")
     let N = Int(sp[0])!
     let M = Int(sp[1])!
-    let D = Int(sp[2])!
+    let D = UInt64(sp[2])!
 
     var edges = [Edge]()
     for i in 1...M {
@@ -53,7 +53,7 @@ func read() -> (N: Int, M: Int, D: Int, edges: [Edge]) {
         sp = line.components(separatedBy: " ")
         let from = Int(sp[0])!
         let to = Int(sp[1])!
-        let cost = Int(sp[2])!
+        let cost = UInt64(sp[2])!
 
         if i < N {
             edges.append(Edge(from, to, cost, true))
@@ -65,12 +65,12 @@ func read() -> (N: Int, M: Int, D: Int, edges: [Edge]) {
     return (N, M, D, edges)
 }
 
-func main(_ N: Int, _ M: Int, _ D: Int, _ edges:[Edge]) {
+func main(_ N: Int, _ M: Int, _ D: UInt64, _ edges:[Edge]) {
     var edges = edges
     edges.sort { $0.cost < $1.cost }
 
     var uf1 = UnionFind(N)
-    var max = 0
+    var max: UInt64 = 0
     var count = 0
     var days = 0
     var i = 0
