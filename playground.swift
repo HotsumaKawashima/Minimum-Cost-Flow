@@ -90,24 +90,6 @@ func main(_ N: Int, _ M: Int, _ D: UInt64, _ edges:[Edge]) {
         }
     }
 
-    if edges[i - 1].org {
-        print(days)
-        return
-    }
-
-    var uf2 = UnionFind(N)
-
-    for edge in edges {
-        if(!uf2.connected(edge.from, edge.to)) {
-            if edge.cost < max || (edge.cost == max && !edge.org) {
-                uf2.union(edge.from, edge.to)
-            } else if(edge.org && edge.cost <= D) {
-                print(days - 1)
-                return
-            }
-        }
-    }
-
     print(days)
 }
 
